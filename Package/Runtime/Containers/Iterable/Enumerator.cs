@@ -12,7 +12,7 @@ namespace Containers
         
         public TData Current { get; private set; }
 
-        object IEnumerator.Current => Current;
+        object? IEnumerator.Current => Current;
         
         public Enumerator(IIteratorContext<TData> iteratorContext, long iterator)
         {

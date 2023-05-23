@@ -7,50 +7,50 @@ namespace Containers
             return new AsEnumerable<TObject>(list);
         }
 
-        public struct AsEnumerable<TObject>
+        public readonly struct AsEnumerable<TObject>
         {
-            private readonly IROArray<TObject> mList;
+            private readonly IROArray<TObject> _list;
 
             public AsEnumerable(IROArray<TObject> list)
             {
-                mList = list;
+                _list = list;
             }
 
             public Enumerator<TObject> GetEnumerator()
             {
-                return new Enumerator<TObject>(mList);
+                return new Enumerator<TObject>(_list);
             }
         }
 
         public struct Enumerator<TObject>// : IEnumerator<TObject>
         {
-            private readonly IROArray<TObject> mList;
-            private readonly int mCount;
-            private int mIdx;
+            private readonly IROArray<TObject> _list;
+            private readonly int _count;
+            private int _index;
 
             public Enumerator(IROArray<TObject> list)
             {
-                mList = list;
-                mCount = list.Count;
-                mIdx = -1;
+                _list = list;
+                _count = list.Count;
+                _index = -1;
             }
 
             public bool MoveNext()
             {
-                mIdx += 1;
-                return mIdx < mCount;
+                _index += 1;
+                return _index < _count;
             }
 
-            public TObject Current
+            public TObject? Current
             {
                 get
                 {
-                    if (mIdx >= 0 && mIdx < mCount)
+                    if (_index >= 0 && _index < _count)
                     {
-                        return mList[mIdx];
+                        return _list[_index];
                     }
 
-                    return default(TObject);
+                    return default;
                 }
             }
         }

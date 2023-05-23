@@ -6,7 +6,7 @@ namespace Containers
         {
             while (self.TryPop(out var value))
             {
-                processor(value);
+                processor(value!);
             }
         }
 
@@ -32,24 +32,21 @@ namespace Containers
 
         public struct Enumerator<TObject>// : IEnumerator<TObject>
         {
-            private readonly IProducer<TObject> mProducer;
-            private TObject mCurrent;
+            private readonly IProducer<TObject> _producer;
+            private TObject? _current;
 
             public Enumerator(IProducer<TObject> producer)
             {
-                mProducer = producer;
-                mCurrent = default(TObject);
+                _producer = producer;
+                _current = default;
             }
 
             public bool MoveNext()
             {
-                return mProducer.TryPop(out mCurrent);
+                return _producer.TryPop(out _current);
             }
 
-            public TObject Current
-            {
-                get { return mCurrent; }
-            }
+            public TObject? Current => _current;
         }
     }
 }
