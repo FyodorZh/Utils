@@ -1,0 +1,9 @@
+{
+  "name": "com.fyodorzh.utils",
+  "version": "1.0.0",
+  "displayName": "Pack of common utilities",
+  "description": "Pack of common utilities",
+  "unity": "2021.3",
+  "dependencies": {},
+  "keywords": [ "utils" ]
+}
