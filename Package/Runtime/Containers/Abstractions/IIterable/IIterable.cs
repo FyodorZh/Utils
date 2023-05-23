@@ -1,4 +1,4 @@
-namespace Utils.Containers
+namespace Containers
 {
     public interface IIterable<out TData>
     {

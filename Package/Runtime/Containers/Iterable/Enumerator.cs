@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     public struct Enumerator<TData> : IEnumerator<TData>
     {

@@ -1,4 +1,4 @@
-namespace Utils.Containers
+namespace Containers
 {
     /// <summary>
     /// Коробка в которую можно клсать и изымать элементы, порядок изъятия не определён

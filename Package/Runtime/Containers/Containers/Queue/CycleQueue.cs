@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using Utils;
 
-namespace Utils.Containers
+namespace Containers
 {
     public class CycleQueue<TData> : IQueue<TData>, IArray<TData>
     {

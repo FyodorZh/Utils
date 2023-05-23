@@ -1,4 +1,4 @@
-namespace Utils.Containers
+namespace Containers
 {
     /// <summary>
     /// Потребитель данных

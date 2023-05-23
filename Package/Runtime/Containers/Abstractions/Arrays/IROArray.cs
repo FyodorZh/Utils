@@ -1,4 +1,4 @@
-namespace Utils.Containers
+namespace Containers
 {
     public interface IROArray<out TData> : IIterable<TData>, ICountable
     {

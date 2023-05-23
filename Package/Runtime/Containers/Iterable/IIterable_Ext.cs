@@ -1,6 +1,6 @@
 using System;
 
-namespace Utils.Containers
+namespace Containers
 {
     public static class IIterable_Ext
     {

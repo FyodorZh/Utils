@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     public class TrivialQueue<TData> : IQueue<TData>
     {

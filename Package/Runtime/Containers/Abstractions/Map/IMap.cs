@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     public interface IMap<TKey, TData> : 
         IROMap<TKey, TData>, 

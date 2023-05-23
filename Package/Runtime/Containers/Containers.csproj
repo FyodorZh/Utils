@@ -5,7 +5,7 @@
         <BaseOutputPath>..\..\..\bin\Containers</BaseOutputPath>
         <OutDir>..\..\..\bin\Containers</OutDir>
         <Nullable>enable</Nullable>
-        <RootNamespace>Utils.Containers</RootNamespace>
+        <RootNamespace>Containers</RootNamespace>
     </PropertyGroup>
     
     <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />

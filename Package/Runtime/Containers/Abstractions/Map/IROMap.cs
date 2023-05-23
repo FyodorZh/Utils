@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     public interface IROMap<TKey, TData> :
         IIterable<KeyValuePair<TKey, TData>>,

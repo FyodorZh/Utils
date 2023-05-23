@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Utils.Containers
+namespace Containers
 {
     /// <summary>
     /// Приоритетная очередь. Чем меньше ключ, тем он приоритетнее

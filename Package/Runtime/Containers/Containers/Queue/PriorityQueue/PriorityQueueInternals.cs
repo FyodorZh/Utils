@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     public partial class PriorityQueue<Key, Data> : PriorityQueue<Key, Data>.IPriorityQueueCtl
         where Key : IComparable<Key>

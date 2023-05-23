@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Utils.Containers
+namespace Containers
 {
     /// <summary>
     /// Поддерживает хранение множества элементов с одним ключом

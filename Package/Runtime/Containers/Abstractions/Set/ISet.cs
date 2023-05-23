@@ -1,4 +1,4 @@
-﻿namespace Utils.Containers
+﻿namespace Containers
 {
     public interface ISet<TData> : IROSet<TData>, IConsumer<TData>
     {

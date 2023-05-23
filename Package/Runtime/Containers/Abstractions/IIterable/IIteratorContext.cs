@@ -1,6 +1,6 @@
 using System;
 
-namespace Utils.Containers
+namespace Containers
 {
     public interface IIteratorContext<out TData> : IDisposable
     {

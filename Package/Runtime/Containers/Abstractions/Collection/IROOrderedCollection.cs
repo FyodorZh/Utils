@@ -1,4 +1,4 @@
-namespace Utils.Containers
+namespace Containers
 {
     public interface IROOrderedCollection<out TData> : 
         IROUnorderedCollection<TData>,
