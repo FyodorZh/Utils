@@ -5,11 +5,18 @@ namespace Containers
     /// <summary>
     /// Приоритетная очередь. Чем меньше ключ, тем он приоритетнее
     /// </summary>
-    public partial class PriorityQueue<Key, Data> : IOrderedCollection<KeyValuePair<Key, Data>>
+    public partial class PriorityQueue<Key, Data> : 
+        IUnorderedCollection<KeyValuePair<Key, Data>>,
+        IIteratorContext<KeyValuePair<Key, Data>>
         where Key : IComparable<Key>
     {
         private readonly List<Key> _keys = new List<Key>();
         private readonly List<Data> _data = new List<Data>();
+
+        protected virtual void OnClear() { }
+        protected virtual void OnAdd(Key key, Data data, int pos) { }
+        protected virtual void OnTrimLast() { }
+        protected virtual void OnSwap(int posA, int posB) { }
 
         public PriorityQueue()
         {
@@ -18,6 +25,7 @@ namespace Containers
         
         public void Clear()
         {
+            OnClear();
             _keys.Clear();
             _data.Clear();
             _keys.Add(default!);
@@ -30,7 +38,9 @@ namespace Containers
         {
             _keys.Add(key);
             _data.Add(data);
-            Up(_keys.Count - 1);
+            int pos = _keys.Count - 1;
+            OnAdd(key, data, pos);
+            Up(pos);
         }
 
         public Key TopKey()
@@ -57,9 +67,9 @@ namespace Containers
             return res.Value;
         }
 
-        public bool Put(KeyValuePair<Key, Data> value)
+        public bool Put(KeyValuePair<Key, Data> data)
         {
-            Enqueue(value.Key, value.Value);
+            Enqueue(data.Key, data.Value);
             return true;
         }
 
@@ -75,12 +85,14 @@ namespace Containers
             return false;
         }
         
-        public bool TryPop(out KeyValuePair<Key, Data> value)
+        public bool TryPop(out KeyValuePair<Key, Data> data)
         {
             int count = Count;
             if (count != 0)
             {
-                value = new KeyValuePair<Key, Data>(_keys[1], _data[1]);
+                OnSwap(1, count);
+                OnTrimLast();
+                data = new KeyValuePair<Key, Data>(_keys[1], _data[1]);
                 _keys[1] = _keys[count];
                 _data[1] = _data[count];
                 _keys.RemoveAt(count);
@@ -88,20 +100,14 @@ namespace Containers
                 Down(1);
                 return true;
             }
-            value = default;
+            data = default;
             return false;
         }
         
         public IIteratorContext<KeyValuePair<Key, Data>>? TryGetIterator(out long iterator)
         {
             iterator = 0;
-            return null;
-        }
-        
-        public IIteratorContext<KeyValuePair<Key, Data>>? TryGetReverseIterator(out long iterator)
-        {
-            iterator = 0;
-            return null;
+            return this;
         }
    
         Key IPriorityQueueCtl.KeyAt(int idx)
@@ -116,14 +122,18 @@ namespace Containers
 
         bool IPriorityQueueCtl.RemoveAtIndex(int id)
         {
-            if (id < 1 || id >= _keys.Count)
+            int lasPos = Count;
+            
+            if (id < 1 || id > lasPos)
             {
                 return false;
             }
 
-            Swap(id, _keys.Count - 1);
-            _keys.RemoveAt(_keys.Count - 1);
-            _data.RemoveAt(_data.Count - 1);
+            Swap(id, lasPos);
+            _keys.RemoveAt(lasPos);
+            _data.RemoveAt(lasPos);
+            
+            OnTrimLast();
 
             Down(id);
             return true;
@@ -135,7 +145,23 @@ namespace Containers
             {
                 return false;
             }
+            UpdateKey(id, key);
+            return true;
+        }
+        
+        bool IPriorityQueueCtl.UpdateKeyAtIndex(int id, Func<Data, Key> evaluator)
+        {
+            if (id < 1 || id >= _keys.Count)
+            {
+                return false;
+            }
 
+            UpdateKey(id, evaluator(_data[id]));
+            return true;
+        }
+        
+        private void UpdateKey(int id, Key key)
+        {
             int cmp = _keys[id].CompareTo(key);
             _keys[id] = key;
             if (cmp < 0)
@@ -146,7 +172,6 @@ namespace Containers
             {
                 Up(id);
             }
-            return true;
         }
 
         private void Up(int id)
@@ -199,12 +224,32 @@ namespace Containers
 
         private void Swap(int a, int b)
         {
+            OnSwap(a, b);
             Key k = _keys[a];
             Data d = _data[a];
             _keys[a] = _keys[b];
             _data[a] = _data[b];
             _keys[b] = k;
             _data[b] = d;
+        }
+
+        KeyValuePair<Key, Data> IIteratorContext<KeyValuePair<Key, Data>>.GetNext(ref long iterator, out bool found)
+        {
+            int nextPos = (int)iterator + 1;
+            if (nextPos < _keys.Count)
+            {
+                iterator += 1;
+                found = true;
+                return new KeyValuePair<Key, Data>(_keys[nextPos], _data[nextPos]);
+            }
+
+            found = false;
+            return default;
+        }
+
+        void IDisposable.Dispose()
+        {
+            // DO NOTHING
         }
     }
 }

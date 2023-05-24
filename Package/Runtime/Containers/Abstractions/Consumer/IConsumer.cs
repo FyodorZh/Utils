@@ -8,9 +8,9 @@ namespace Containers
         /// <summary>
         /// Кладёт элемент в приёмник.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="data"></param>
         /// <returns> FALSE если положить элемент не удалось. Например, исчерпана ёмкость коллекции или что угодно другое </returns>
-        bool Put(TData value);
+        bool Put(TData data);
     }
     
     /// <summary>

@@ -6,9 +6,9 @@ namespace Containers
     {
         private readonly Queue<TData> _queue = new Queue<TData>();
 
-        public bool Put(TData value)
+        public bool Put(TData data)
         {
-            _queue.Enqueue(value);
+            _queue.Enqueue(data);
             return true;
         }
         
@@ -24,15 +24,15 @@ namespace Containers
             return false;
         }
 
-        public bool TryPop(out TData? value)
+        public bool TryPop(out TData? data)
         {
             if (_queue.Count > 0)
             {
-                value = _queue.Dequeue();
+                data = _queue.Dequeue();
                 return true;
             }
 
-            value = default;
+            data = default;
             return false;
         }
         

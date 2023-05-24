@@ -4,6 +4,6 @@ namespace Containers
 {
     public interface IIteratorContext<out TData> : IDisposable
     {
-        TData GetNext(ref long iterator, out bool found);
+        TData? GetNext(ref long iterator, out bool found);
     }
 }

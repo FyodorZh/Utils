@@ -10,6 +10,7 @@ namespace Containers
         {
             bool RemoveAtIndex(int id);
             bool UpdateKeyAtIndex(int id, Key key);
+            bool UpdateKeyAtIndex(int id, Func<Data, Key> evaluator);
             Key KeyAt(int idx);
             Data DataAt(int idx);
         }

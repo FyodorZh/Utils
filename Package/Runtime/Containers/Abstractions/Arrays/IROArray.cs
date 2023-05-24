@@ -1,7 +1,7 @@
 namespace Containers
 {
-    public interface IROArray<out TData> : IIterable<TData>, ICountable
+    public interface IROArray<out TData> : IStableIterable<TData>, ICountable
     {
-        TData this[int id] { get; }
+        TData this[int index] { get; }
     }
 }

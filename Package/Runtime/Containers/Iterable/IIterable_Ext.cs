@@ -15,6 +15,17 @@ namespace Containers
             throw new NotSupportedException();
         }
         
+        public static Enumerable<TData> Enumerate<TData>(this IStableIterable<TData> iterable)
+        {
+            var context = iterable.TryGetIterator(out long iterator);
+            if (context != null)
+            {
+                return new Enumerable<TData>(new Enumerator<TData>(context, iterator));
+            }
+
+            throw new NotSupportedException();
+        }
+        
         public readonly struct Enumerable<TData>
         {
             private readonly Enumerator<TData> _enumerator;

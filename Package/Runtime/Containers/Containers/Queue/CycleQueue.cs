@@ -70,11 +70,11 @@ namespace Containers
             return true;
         }
 
-        public bool Put(TData value)
+        public bool Put(TData data)
         {
             if (Grow())
             {
-                _data[(_index + _count) & _capacityMask] = value;
+                _data[(_index + _count) & _capacityMask] = data;
                 _count += 1;
                 return true;
             }
@@ -106,17 +106,17 @@ namespace Containers
             return false;
         }
 
-        public bool TryPop(out TData? value)
+        public bool TryPop(out TData? data)
         {
             if (_count > 0)
             {
-                value = _data[_index];
+                data = _data[_index];
                 _data[_index] = default!;
                 _count -= 1;
                 _index = (_index + 1) & _capacityMask;
                 return true;
             }
-            value = default;
+            data = default;
             return false;
         }
 
@@ -138,24 +138,24 @@ namespace Containers
             }
         }
 
-        public TData this[int id]
+        public TData this[int index]
         {
             get
             {
-                if ((uint) id >= (uint)_count) 
+                if ((uint) index >= (uint)_count) 
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                return _data[(_index + id) & _capacityMask];
+                return _data[(_index + index) & _capacityMask];
             }
             set
             {
-                if ((uint) id >= (uint)_count) 
+                if ((uint) index >= (uint)_count) 
                 {
                     throw new ArgumentOutOfRangeException();
                 }
                 
-                _data[(_index + id) & _capacityMask] = value;
+                _data[(_index + index) & _capacityMask] = value;
             }
         }
         

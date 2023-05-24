@@ -8,9 +8,9 @@ namespace Containers
         /// <summary>
         /// Получает очередной элемент из продюсера
         /// </summary>
-        /// <param name="value"> возвращаемый элемент </param>
+        /// <param name="data"> возвращаемый элемент </param>
         /// <returns> FALSE если очередной элемент получить не удалось </returns>
-        bool TryPop(out TData? value);
+        bool TryPop(out TData? data);
     }
 
     /// <summary>
