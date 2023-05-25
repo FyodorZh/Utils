@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Containers
@@ -6,13 +7,13 @@ namespace Containers
     {
         private readonly Queue<TData> _queue = new Queue<TData>();
 
-        public bool Put(TData data)
+        public bool Add(TData data)
         {
             _queue.Enqueue(data);
             return true;
         }
         
-        public bool TryPeek(out TData? value)
+        public bool Peek(out TData? value)
         {
             if (_queue.Count > 0)
             {
@@ -24,7 +25,7 @@ namespace Containers
             return false;
         }
 
-        public bool TryPop(out TData? data)
+        public bool Take(out TData? data)
         {
             if (_queue.Count > 0)
             {
@@ -41,13 +42,12 @@ namespace Containers
             _queue.Clear();
         }
 
-        public IIteratorContext<TData>? TryGetIterator(out long iterator)
+        public IIteratorContext<TData> GetIterator(out long iterator)
         {
-            iterator = 0;
-            return null;
+            throw new NotImplementedException();
         }
         
-        public IIteratorContext<TData>? TryGetReverseIterator(out long iterator)
+        public IIteratorContext<TData>? GetReverseIterator(out long iterator)
         {
             iterator = 0;
             return null;

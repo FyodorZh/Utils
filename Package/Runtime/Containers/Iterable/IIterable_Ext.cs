@@ -6,23 +6,23 @@ namespace Containers
     {
         public static Enumerable<TData> EnumerateUnstable<TData>(this IIterable<TData> iterable)
         {
-            var context = iterable.TryGetIterator(out long iterator);
-            if (context != null)
-            {
-                return new Enumerable<TData>(new Enumerator<TData>(context, iterator));
-            }
-
-            throw new NotSupportedException();
+            var context = iterable.GetIterator(out long iterator);
+            return new Enumerable<TData>(new Enumerator<TData>(context, iterator));
         }
         
         public static Enumerable<TData> Enumerate<TData>(this IStableIterable<TData> iterable)
         {
-            var context = iterable.TryGetIterator(out long iterator);
+            var context = iterable.GetIterator(out long iterator);
+            return new Enumerable<TData>(new Enumerator<TData>(context, iterator));
+        }
+        
+        public static Enumerable<TData> EnumerateReverse<TData>(this IStableIterable<TData> iterable)
+        {
+            var context = iterable.GetReverseIterator(out long iterator);
             if (context != null)
             {
                 return new Enumerable<TData>(new Enumerator<TData>(context, iterator));
             }
-
             throw new NotSupportedException();
         }
         

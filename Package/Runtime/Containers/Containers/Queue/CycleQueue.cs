@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Utils;
 
@@ -70,7 +71,7 @@ namespace Containers
             return true;
         }
 
-        public bool Put(TData data)
+        public bool Add(TData data)
         {
             if (Grow())
             {
@@ -95,7 +96,7 @@ namespace Containers
             return false;
         }
         
-        public bool TryPeek(out TData? value)
+        public bool Peek(out TData? value)
         {
             if (_count > 0)
             {
@@ -106,7 +107,7 @@ namespace Containers
             return false;
         }
 
-        public bool TryPop(out TData? data)
+        public bool Take(out TData? data)
         {
             if (_count > 0)
             {
@@ -159,122 +160,17 @@ namespace Containers
             }
         }
         
-        public IIteratorContext<TData>? TryGetIterator(out long iterator)
+        public IIteratorContext<TData> GetIterator(out long iterator)
         {
-            iterator = 0;
-            return null;
+            throw new NotImplementedException();
         }
         
-        public IIteratorContext<TData>? TryGetReverseIterator(out long iterator)
+        public IIteratorContext<TData>? GetReverseIterator(out long iterator)
         {
             iterator = 0;
             return null;
         }
 
-        // public EnumerableWithOrder Enumerate()
-        // {
-        //     return new EnumerableWithOrder(this, QueueEnumerationOrder.HeadToTail);
-        // }
-        //
-        // public EnumerableWithOrder Enumerate(QueueEnumerationOrder order)
-        // {
-        //     return new EnumerableWithOrder(this, order);
-        // }
-        //
-        // public struct EnumerableWithOrder
-        // {
-        //     private readonly CycleQueue<T> mQueue;
-        //     private readonly QueueEnumerationOrder mOrder;
-        //
-        //     internal EnumerableWithOrder(CycleQueue<T> queue, QueueEnumerationOrder order)
-        //     {
-        //         mQueue = queue;
-        //         mOrder = order;
-        //     }
-        //
-        //     public Enumerator GetEnumerator()
-        //     {
-        //         return new Enumerator(mQueue, mOrder);
-        //     }
-        // }
-        //
-        // public struct Enumerator
-        // {
-        //     private readonly CycleQueue<T> mQueue;
-        //     private readonly QueueEnumerationOrder mOrder;
-        //     private int mCurrent;
-        //     private int mEnd;
-        //
-        //     internal Enumerator(CycleQueue<T> queue, QueueEnumerationOrder order)
-        //     {
-        //         mQueue = queue;
-        //         mOrder = order;
-        //         mCurrent = 0;
-        //         mEnd = 0;
-        //         SetIndices();
-        //     }
-        //
-        //     private void SetIndices()
-        //     {
-        //         switch (mOrder)
-        //         {
-        //             case QueueEnumerationOrder.HeadToTail:
-        //                 mCurrent = mQueue._id - 1;
-        //                 mEnd = mQueue._id + mQueue._count - 1;
-        //                 break;
-        //             case QueueEnumerationOrder.TailToHead:
-        //                 mCurrent = mQueue._id + mQueue._count;
-        //                 mEnd = mQueue._id;
-        //                 break;
-        //             default:
-        //                 mCurrent = 0;
-        //                 mEnd = 0;
-        //                 break;
-        //         }
-        //     }
-        //
-        //     public void Dispose()
-        //     {
-        //     }
-        //
-        //     public bool MoveNext()
-        //     {
-        //         switch (mOrder)
-        //         {
-        //             case QueueEnumerationOrder.HeadToTail:
-        //                 if (mCurrent == mEnd)
-        //                 {
-        //                     return false;
-        //                 }
-        //                 else
-        //                 {
-        //                     mCurrent++;
-        //                     return true;
-        //                 }
-        //             case QueueEnumerationOrder.TailToHead:
-        //                 if (mCurrent == mEnd)
-        //                 {
-        //                     return false;
-        //                 }
-        //                 else
-        //                 {
-        //                     mCurrent--;
-        //                     return true;
-        //                 }
-        //             default:
-        //                 return false;
-        //         }
-        //     }
-        //
-        //     public T Current
-        //     {
-        //         get
-        //         {
-        //             return mQueue._data[mCurrent & mQueue._capacityMask];
-        //         }
-        //     }
-        // }
-        //
         // [UT.UT("CycleQueue")]
         // private static void UT(UT.IUTest test)
         // {

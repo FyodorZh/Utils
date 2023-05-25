@@ -6,7 +6,7 @@ namespace Containers
     /// <typeparam name="TData"></typeparam>
     public interface IQueue<TData> : IOrderedCollection<TData>
     {
-        bool TryPeek(out TData? value);
+        bool Peek(out TData? value);
     }
 
     public interface ISingleReaderWriterConcurrentQueue<TData> : IQueue<TData>, ISingleReaderWriterConcurrentUnorderedCollection<TData>

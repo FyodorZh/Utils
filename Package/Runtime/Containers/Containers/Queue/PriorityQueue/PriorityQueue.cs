@@ -63,11 +63,11 @@ namespace Containers
 
         public Data Dequeue()
         {
-            TryPop(out var res);
+            Take(out var res);
             return res.Value;
         }
 
-        public bool Put(KeyValuePair<Key, Data> data)
+        public bool Add(KeyValuePair<Key, Data> data)
         {
             Enqueue(data.Key, data.Value);
             return true;
@@ -85,7 +85,7 @@ namespace Containers
             return false;
         }
         
-        public bool TryPop(out KeyValuePair<Key, Data> data)
+        public bool Take(out KeyValuePair<Key, Data> data)
         {
             int count = Count;
             if (count != 0)
@@ -104,7 +104,7 @@ namespace Containers
             return false;
         }
         
-        public IIteratorContext<KeyValuePair<Key, Data>>? TryGetIterator(out long iterator)
+        public IIteratorContext<KeyValuePair<Key, Data>> GetIterator(out long iterator)
         {
             iterator = 0;
             return this;

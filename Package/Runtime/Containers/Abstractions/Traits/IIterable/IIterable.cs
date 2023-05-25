@@ -2,11 +2,11 @@ namespace Containers
 {
     public interface IIterable<out TData>
     {
-        IIteratorContext<TData>? TryGetIterator(out long iterator);
+        IIteratorContext<TData> GetIterator(out long iterator);
     }
     
     public interface IStableIterable<out TData> : IIterable<TData>
     {
-        IIteratorContext<TData>? TryGetReverseIterator(out long iterator);
+        IIteratorContext<TData>? GetReverseIterator(out long iterator);
     }
 }

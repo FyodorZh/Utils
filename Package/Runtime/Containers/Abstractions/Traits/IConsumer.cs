@@ -10,7 +10,7 @@ namespace Containers
         /// </summary>
         /// <param name="data"></param>
         /// <returns> FALSE если положить элемент не удалось. Например, исчерпана ёмкость коллекции или что угодно другое </returns>
-        bool Put(TData data);
+        bool Add(TData data);
     }
     
     /// <summary>

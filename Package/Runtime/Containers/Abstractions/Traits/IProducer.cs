@@ -10,7 +10,7 @@ namespace Containers
         /// </summary>
         /// <param name="data"> возвращаемый элемент </param>
         /// <returns> FALSE если очередной элемент получить не удалось </returns>
-        bool TryPop(out TData? data);
+        bool Take(out TData? data);
     }
 
     /// <summary>

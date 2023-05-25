@@ -6,7 +6,7 @@ namespace Containers
     /// <typeparam name="TData"></typeparam>
     public interface IStack<TData> : IUnorderedCollection<TData>
     {
-        bool TryPeek(out TData data);
+        bool Peek(out TData data);
     }
 
     public interface IConcurrentStack<TData> : IStack<TData>, IConcurrentUnorderedCollection<TData>
